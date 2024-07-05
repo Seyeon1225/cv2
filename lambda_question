@@ -1,0 +1,38 @@
+# 1
+original_list = [1, 3, 5, 7, 9]
+
+plus_2 = list(map(lambda x : x+2 ,original_list))
+
+print(plus_2)
+
+# 2
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+odd_double = list(map(lambda x : x*x if x % 2 != 0 else x, numbers))
+
+print(odd_double)
+
+# 3
+words = ["apple", "banana", "kiwi", "orange", "grape"]
+
+over_5 = list(filter(lambda x : len(x)>5, words ))
+print(over_5)
+
+# cut = list(filter(lambda x : x if len(words)>5 ))
+
+# 4
+list1 = [1, 2, 3, 4]
+list2 = [5, 6, 7, 8]
+
+multi = list(map(lambda x , y : x*y , list1,list2 ))
+
+print(multi)
+
+# 5
+
+num_multi = lambda x : print(x*x*x) if x % 2 == 1 else print(x*x)
+num_multi(7)
+
+# 6
+
+num =list(map(lambda x : print("0입니다") if x ==0  else print(f"홀수 : {x}") if x %2 == 1 else print(f"짝수 : {x}"), range(11)))

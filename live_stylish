@@ -1,0 +1,41 @@
+import cv2
+import numpy as np
+
+def callBack(value) :
+    pass
+
+cap = cv2.VideoCapture(0) 
+cap.set(10,100)
+low = 10
+high = 100
+
+format(50,50)
+
+cv2.namedWindow('Bar',cv2.WINDOW_NORMAL)
+cv2.createTrackbar("sigma_s", "Bar", 0, 200, callBack)
+cv2.createTrackbar("sigma_r", "Bar", 0, 100, callBack)
+cv2.createTrackbar('high_t','Bar',0, 225, callBack)
+
+
+while True :
+    ret, frame = cap.read()        # 프레임을 while에 들어가서 계속 보는 것
+
+    sigma_s = cv2.getTrackbarPos("sigma_s","Bar")
+    sigma_r = cv2.getTrackbarPos("sigma_r","Bar") / 100
+    high_t = cv2.getTrackbarPos("high_t","Bar")
+    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    canny_frame = cv2.Canny(frame,low,high_t)
+    style_frame = cv2.stylization(frame, sigma_s, sigma_r) 
+
+    cv2.imshow('Image_style',style_frame)
+    cv2.imshow("Video",frame)           # Video라는 이름으로 저장
+    cv2.imshow("Canny",canny_frame)
+    cv2.imshow("HVS_Video",hsv_frame)  
+
+    if cv2.waitKey(10) & 0xff ==27:      # q를 치면 종료
+        break
+
+cap.release()                               # 카메라 열어서 확인
+
+cv2.destroyAllWindows()                    
